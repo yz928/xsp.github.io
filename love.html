@@ -1,91 +1,651 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>执子之手，与子偕老</title>
-  <meta name="language" content="zh-CN">
-  <link type="text/css" rel="stylesheet" href="css/theme.css" />
-  <script src="js/jquery-2.0.3.min.js"></script>
-  <style type="text/css">
-	body {
-		font-family:STSong,华文宋体;
-		color:orange;
-	}
-  </style>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA2klEQVQ4T62TUQ6CMAyG2/GCByAeR7iSxmfgmahHch7HcAB5YSXb2GBlmCW6t6Xtt7/tP4QfD7r6Pu9KwKx29+Jzrtbs/nB/xmIGYIr1wcwnAY0BIBYrhqucAY8akBrejSJqBQjaix2HS4MraVZFeOR83Y05QCwhZbzyD4C8KxWIUiD6DaQ8beej7BDf+a0RiCcASG1FKqKXGSLzwbLGbzJorPQKzeYDAPdCDDL7YwPwhlrcyNuxK6WxdcWBgohtNwBu730AtzaTvX7Mz4C3G3wuJjsJkOIFnTMBCHFmkktRl00AAAAASUVORK5CYII=" />
+    <title>code</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #000;
+            overflow: hidden;
+            min-width: 1600px;
+            min-height: 900px;
+        }
+        .box {
+            transform: rotate3d(0, 0, 0, 0deg);
+            transform-origin: 926px 576px;
+            transition: transform 5s;
+            transform-style: preserve-3d;
+        }
+        .stars {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            animation: opacity 3s linear infinite;
+        }
+        @keyframes opacity {
+            0% {
+                opacity: .9;
+            }
+            50% {
+                opacity: .5;
+            }
+            100% {
+                opacity: .99;
+            }
+        }
+        @keyframes animationColor {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -100% 0;
+            }
+        }
+        span {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            font-size: 32px;
+            font-weight: bolder;
+            font-family: cursive;
+            color: #ccc;
+            transition-property: left, top, transform, opacity;
+            transition-timing-function: ease;
+            -moz-transition-timing-function: ease;
+            -webkit-transition-timing-function: ease;
+            -o-transition-timing-function: ease;
+            transition-duration: 100ms;
+        }
+        @keyframes show_temp_me {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .heart {
+            opacity: 0;
+            position: absolute;
+            left: 1340px;
+            top: 546px;
+            font-size: 100px;
+            color: #f00;
+            text-shadow: 2px 2px 2px #f00;
+            z-index: 999;
+            transition: opacity 5s;
+        }
+        .heartBroken {
+            filter: blur(0.007em);
+        }
+        .heartBroken::before,
+        .heartBroken::after {
+            content: "❤";
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 50% 80%;
+        }
+        .heartBroken::before {
+            animation: crack1 2.5s linear 1s forwards;
+            clip-path: inset(0 50% 0 0);
+        }
+ 
+        .heartBroken::after {
+            animation: crack2 1.5s linear 200ms forwards;
+            clip-path: inset(0 0 0 50%);
+        }
+        @keyframes crack1 {
+            0% {
+                transform: rotateZ(0deg);
+            }
+ 
+            100% {
+ 
+                transform: rotateZ(-10deg);
+            }
+        }
+        @keyframes crack2 {
+            0% {
+                transform: rotateZ(0deg);
+            }
+ 
+            100% {
+                transform: rotateZ(10deg);
+            }
+        }
+        @keyframes beat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2)
+            }
+            100% {
+                transform: scale(1)
+            }
+        }
+        .box > div {
+            position: relative;
+            transition-property: left, top, opacity;
+            transition-duration: 3s;
+            transition-timing-function: ease-out;
+        }
+        span {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            font-size: 22px;
+            font-weight: bolder;
+            font-family: cursive;
+            color: #ccc;
+            transition-property: left, top, transform, opacity;
+            transition-timing-function: ease;
+            -moz-transition-timing-function: ease;
+            -webkit-transition-timing-function: ease;
+            -o-transition-timing-function: ease;
+            transition-duration: 100ms;
+        }
+        .broken {
+            transform: rotateZ(0deg);
+            transition-property: transform;
+            transition-timing-function: ease;
+            -moz-transition-timing-function: ease;
+            -webkit-transition-timing-function: ease;
+            -o-transition-timing-function: ease;
+            transition-duration: 1s;
+        }
+        #love_left {
+            transform-origin: 870px 780px;
+        }
+        #love_right {
+            transform-origin: 870px 730px;
+        }
+        .text_ta {
+            opacity: 0;
+            position: relative;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 100px;
+            transition-property: top, left, opacity;
+            transition-timing-function: ease;
+            -moz-transition-timing-function: ease;
+            -webkit-transition-timing-function: ease;
+            -o-transition-timing-function: ease;
+            transition-duration: 2s;
+        }
+        .arrow {
+            width: 222px;
+            height: 110px;
+            position: absolute;
+            top: -300px;
+            left: 770px;
+            transform: rotateZ(0deg);
+            transition-property: top, left, transform;
+            transition-duration: 1s;
+        }
+        .bloods {
+            position: absolute;
+            left: 34px;
+            top: 96px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px 42px 24px 42px;
+            background-color: #d30;
+            transform: rotate(45deg);
+            transition: top 3s;
+        }
+    </style>
 </head>
 <body>
-  <div id="div_container">
-    <div id="div_start_bg"></div>
-    <div id="div_onlyyou">
-      <div id="div_oy_inner">
-        <div class="div_oy_text">
-          <h1></h1>
-          <img class="img_oy_text" src="" />
-          <p class="p_oy_text"></p>
-          <div></div>
-          <ul id="ul_oy_benefit">
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-            <li class="li_oy_benefit"></li>
-          </ul>
-        </div>
-        <ul id="ul_oy_btn">
-
-          <li onclick="oy_go_next()">Yes&nbsp;&nbsp;❤</li>
-          <li onclick="oy_show_benefit()">No&nbsp;&nbsp;✖</li>
-        </ul>
-        <div id="div_oy_note" onclick="oy_hide_note()">
-          <img src="images/emoji_kelian.jpg" alt="" /><br />给我想要的Yes！
-          <div id="div_oy_note_close">✖</div>
-        </div>
-        <div id="div_oy_yes">
-          <img src="images/emoji_bixin.jpg" alt="" /><br />太好了！哈哈~
-        </div>
-      </div>
-    </div>
-    <div class="div_pure_words">
-      <div class="div_pure_words_bg">
-        <div class="div_pure_words_height"></div>
-      </div>
-      <div class="div_pw_typed">
-        <span id="span_pw_typed"></span>
-      </div>
-    </div>
-    <div id="div_btn_container">
-      <div id="div_btn_inner">
-        <div class="div_music_tips"></div>
-        <div class="div_btn" id="div_music" onclick="music_switch()">
-          <img id="img_music" src="images/music_note_big.png"
-            style="-webkit-animation: music_play_rotate 1s linear infinite;" />
-          <audio id="audio_music" autoplay="autoplay" loop="loop">
-            <source type="audio/mpeg" />
-          </audio>
-        </div>
-        <div class="div_record_tips"></div>
-        <div class="div_btn" id="div_record" onclick="record_switch()">
-          <audio id="audio_record" loop="loop">
-            <source type="audio/mpeg" />
-          </audio>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="stars" id="stars"></div>
+<script>
+    let arr = ['one', 'two', 'three', 'four', 'five', 'six', 'seven']
+    let love_2 = {
+        one: [[], []],
+        two: [[], []],
+        three: [[], []],
+        four: [[], []],
+        five: [[], []],
+        six: [[], []],
+        seven: [[], []],
+    }
+    let love = {
+        one: [
+            [482, 482, 463, 463, 446, 446, 434, 434, 425, 425, 423, 423, 426, 426, 434, 434, 446, 446, 461, 461, 479, 479, 499, 499, 521, 521, 542, 542, 562, 562, 583, 583, 603, 603, 623, 623, 639, 639, 655, 655, 671, 671, 685, 685, 701, 701, 714, 714, 728, 728, 744, 744, 758, 758, 773, 773, 785],
+            [1366, 1388, 1353, 1401, 1337, 1417, 1318, 1436, 1296, 1458, 1274, 1482, 1252, 1504, 1231, 1526, 1213, 1544, 1198, 1559, 1187, 1568, 1180, 1575, 1177, 1578, 1178, 1577, 1180, 1575, 1184, 1571, 1192, 1563, 1202, 1553, 1215, 1540, 1230, 1525, 1246, 1509, 1262, 1493, 1279, 1476, 1295, 1460, 1312, 1443, 1328, 1427, 1345, 1410, 1361, 1394, 1378]
+        ],
+        two: [
+            [501, 501, 489, 489, 471, 471, 456, 456, 445, 445, 444, 444, 447, 447, 455, 455, 468, 468, 486, 486, 507, 507, 527, 527, 546, 546, 566, 566, 586, 586, 605, 605, 622, 622, 638, 638, 653, 653, 667, 667, 681, 681, 694, 694, 708, 708, 724, 724, 737, 737, 752, 752],
+            [1366, 1388, 1346, 1408, 1333, 1421, 1317, 1437, 1299, 1455, 1278, 1476, 1257, 1497, 1237, 1517, 1221, 1533, 1208, 1546, 1201, 1553, 1200, 1554, 1200, 1554, 1202, 1552, 1206, 1548, 1215, 1539, 1228, 1526, 1242, 1512, 1258, 1496, 1272, 1482, 1287, 1467, 1304, 1450, 1320, 1434, 1335, 1419, 1352, 1402, 1367, 1388]
+        ],
+        three: [
+            [520, 520, 510, 510, 498, 498, 481, 481, 465, 465, 464, 464, 467, 467, 480, 480, 497, 497, 518, 518, 538, 538, 557, 557, 578, 578, 598, 598, 614, 614, 631, 631, 645, 645, 660, 660, 673, 673, 688, 688, 703, 703, 716, 716, 733],
+            [1366, 1388, 1346, 1408, 1327, 1427, 1314, 1440, 1299, 1455, 1277, 1477, 1256, 1498, 1239, 1515, 1226, 1528, 1219, 1535, 1220, 1534, 1221, 1533, 1226, 1528, 1235, 1522, 1249, 1508, 1262, 1495, 1278, 1479, 1294, 1463, 1311, 1446, 1326, 1431, 1341, 1416, 1358, 1399, 1378]
+        ],
+        four: [
+            [539, 539, 530, 530, 518, 518, 507, 507, 490, 490, 485, 485, 496, 496, 514, 514, 534, 534, 554, 554, 574, 574, 593, 593, 610, 610, 625, 625, 639, 639, 652, 652, 668, 668, 683, 683, 696, 696, 714],
+            [1366, 1388, 1346, 1408, 1327, 1427, 1307, 1447, 1294, 1460, 1272, 1482, 1254, 1500, 1241, 1513, 1241, 1513, 1242, 1512, 1247, 1507, 1259, 1495, 1271, 1483, 1286, 1468, 1303, 1451, 1321, 1433, 1335, 1419, 1350, 1404, 1366, 1388, 1379]
+        ],
+        five: [
+            [559, 559, 550, 550, 539, 539, 530, 530, 514, 514, 516, 516, 538, 538, 558, 558, 578, 578, 597, 597, 613, 613, 627, 627, 639, 639, 655, 655, 672, 672],
+            [1366, 1388, 1344, 1410, 1324, 1430, 1304, 1450, 1286, 1468, 1265, 1489, 1262, 1493, 1263, 1492, 1275, 1480, 1287, 1468, 1304, 1451, 1321, 1434, 1339, 1416, 1352, 1400, 1366, 1387]
+        ],
+        six: [
+            [580, 580, 570, 570, 560, 560, 550, 550, 536, 536, 556, 556, 576, 576, 592, 592, 606, 606, 619, 619, 634, 634, 650],
+            [1366, 1388, 1345, 1409, 1325, 1429, 1305, 1449, 1284, 1470, 1285, 1469, 1296, 1458, 1312, 1442, 1328, 1426, 1346, 1408, 1361, 1393, 1377]
+        ],
+        seven: [
+            [603, 603, 592, 592, 578, 578, 621],
+            [1367, 1389, 1346, 1408, 1324, 1428, 1376]
+        ]
+    }
+    function stars() {
+        let boxShadow = "";
+        for (let i = 0; i < 2000; i++) {
+            boxShadow += parseInt(1000 - (Math.random() * 2000)) + "px " + parseInt(1000 - (Math.random() * 2000)) + "px #" + Math.random().toString(16).substr(-6) + ",";
+        }
+        boxShadow = boxShadow.replace(/,$/gi, "");
+        document.getElementById("stars").style.boxShadow = boxShadow;
+        setTimeout(function () {
+            stars()
+        }, 6000)
+    }
+    window.onload = function () {
+        stars()
+        for (const value of arr) {
+            for (let i = 0; i < love[value][0].length; i++) {
+                love_2[value][0][i] = love[value][0][i] - 360
+                love_2[value][1][i] = love[value][1][i] - 1166
+            }
+        }
+        document.getElementsByTagName('body')[0].innerHTML += '<div id="box" class="box"><div style="opacity:0" class="ta" id="ta"></div><div class="me" id="me"></div></div>'
+        let object = new Class()
+        object.start()
+    }
+    let arrow = {
+        top: [0, 16, 38, 62, 80, 38, 38, 38, 38, 38, 38, 38, 38, 38, 0, 14, 62, 80],
+        left: [0, 15, 31, 15, 0, 50, 69, 88, 107, 126, 145, 164, 183, 202, 171, 189, 189, 171],
+        rotate: [300, 300, 270, 225, 225, 270, 270, 270, 270, 270, 270, 270, 270, 270, 300, 300, 225, 225]
+    }
+    class Class {
+        async start() {
+            await this.showTA()
+            await this.show_me()
+            await this.discolor_me()
+            await this.show_ta_one()
+            await this.change_me_color()
+            await this.heart()
+            await this.show_ta_all()
+            await this.near()
+            await this.rotate()
+            await this.separate()
+            await this.arrow()
+            await this.heartBroken_()
+            await this.drippingBlood()
+            await this.ta_disappear()
+            await this.broken()
+            this.end()
+        }
+        showTA() {
+            let that = this
+            return new Promise(function (resolve) {
+                let width = document.documentElement.clientWidth
+                let height = document.documentElement.clientHeight
+                let backgroundImage = ""
+                for (let i = 0; i < 10; i++) {
+                    backgroundImage += "#" + Math.random().toString(16).substr(-6) + ","
+                }
+                backgroundImage = backgroundImage.replace(/,$/gi, ');"');
+                let style = '"text-fill-color:transparent;background-clip:text;background-size:200% 100%;left:' + (width / 2 - 50) + 'px;top:' + (height / 2 - 50) + 'px;background-image: linear-gradient(to right,' + backgroundImage
+                document.getElementsByTagName('body')[0].innerHTML += '<p id="text_ta" class="text_ta" style=' + style + '>我喜欢你，（名字）</p>'
+                let element = document.getElementById('text_ta')
+                setTimeout(function () {
+                    element.style.opacity = '1'
+                },500)
+                setTimeout(function () {
+                    element.style.top = "180px"
+                    element.style.left = "165px"
+                    element.style.animation = "animationColor 5s infinite linear"
+                    setTimeout(function () {
+                        resolve("showTA")
+                    }, 2500)
+                }, 2800)
+                that.text_ta_backgroundImage_interval = setInterval(function () {
+                    let backgroundImage = ""
+                    for (let i = 0; i < 10; i++) {
+                        backgroundImage += "#" + Math.random().toString(16).substr(-6) + ","
+                    }
+                    backgroundImage = backgroundImage.replace(/,$/gi, ')');
+                    element.style.backgroundImage = 'linear-gradient(to right,' + backgroundImage
+                }, 3000)
+            })
+        }
+        show_me() {
+            return new Promise(async function (resolve, reject) {
+                document.getElementById("me").innerHTML += '<div id="love_left" class="broken"></div>'
+                document.getElementById("me").innerHTML += '<div id="love_right" class="broken"></div>'
+                let love_left = document.getElementById('love_left')
+                let love_right = document.getElementById('love_right')
+                let color = "#858585"
+                for (const value of arr) {
+                    for (let i = 0; i < love[value][0].length; i++) {
+                        if (i % 2 === 0) {
+                            love_left.innerHTML += "<span id=" + value + "_" + i + " style='opacity:0;color:" + color + ";top:" + love[value][0][i] + "px;left:" + love[value][1][i] + "px;text-shadow:2px 2px 2px " + color + ";'>❤</span>"
+                        } else {
+                            love_right.innerHTML += "<span id=" + value + "_" + i + " style='opacity:0;color:" + color + ";top:" + love[value][0][i] + "px;left:" + love[value][1][i] + "px;text-shadow:2px 2px 2px " + color + ";'>❤</span>"
+                        }
+                    }
+                }
+                for (const value of arr) {
+                    for (let i = 0; i < love[value][0].length; i++) {
+                        await new Promise(function (resolve) {
+                            setTimeout(function () {
+                                let element = document.getElementById(value + "_" + i)
+                                element.style.opacity = "1"
+                                resolve()
+                            }, 20)
+                        })
+                    }
+                }
+                resolve("show_me")
+            })
+        }
+        discolor_me() {
+            let interval = '';
+            let time = 800;
+            return new Promise(function (resolve) {
+                interval = setInterval(discolor, time)
+ 
+                function discolor() {
+                    let element = "";
+                    for (const value of arr) {
+                        for (let i = 0; i < love[value][0].length; i++) {
+                            element = document.getElementById(value + "_" + i)
+                            element.style.color = "#" + Math.random().toString(16).substr(-6)
+                            element.style.textShadow = "2px 2px 2px #" + Math.random().toString(16).substr(-6)
+                        }
+                    }
+                    clearInterval(interval);
+                    if (time > 400) {
+                        time -= 80;
+                    } else if (time > 390) {
+                        time -= 1;
+                        resolve("discolor_me")
+                    }
+                    if (time > 390) {
+                        interval = setInterval(discolor, time);
+                    }
+                }
+            })
+        }
+        show_ta_one() {
+            let that = this
+            return new Promise(function (resolve) {
+                let i = 0;
+                let text_ta = document.getElementById('text_ta')
+                text_ta.style.transitionDuration = "4s"
+                text_ta.style.opacity = "0"
+                clearInterval(that.text_ta_backgroundImage_interval)
+                setTimeout(function () {
+                    document.getElementById("text_ta").remove()
+                }, 5000)
+                document.getElementById("box").innerHTML += '<div id="temp_ta" class="temp_ta"></div>'
+                let element = document.getElementById('temp_ta')
+                let interval = setInterval(function () {
+                    element.innerHTML += "<span id=temp_" + i + " style='z-index:-1;opacity:1;:#858585;top:" + love_2.one[0][i] + "px;left:" + love_2.one[1][i] + "px;text-shadow:2px 2px 2px #858585;'>❤</span>"
+                    i++
+                    if (i === love_2.one[0].length) {
+                        clearInterval(interval)
+                        setTimeout(function () {
+                            resolve("show_ta_one")
+                        }, 500)
+                    }
+                }, 50)
+            })
+        }
+        change_me_color() {
+            let that = this
+            return new Promise(async function (resolve) {
+                document.getElementById("me").innerHTML += '<div style="opacity:0;" id="temp_me" class="temp_me"></div>'
+                let element = document.getElementById("temp_me")
+                for (const value of arr) {
+                    for (let i = 0; i < love[value][0].length; i++) {
+                        element.innerHTML += "<span id=temp_" + value + "_" + i + " style='color:#EB098E;top:" + love[value][0][i] + "px;left:" + love[value][1][i] + "px;text-shadow:2px 2px 2px #FDB0DA;'>❤</span>"
+                    }
+                }
+                setTimeout(function () {
+                    element.style.animation = "show_temp_me 5s"
+                    setTimeout(function () {
+                        for (const value of arr) {
+                            for (let i = 0; i < love[value][0].length; i++) {
+                                let element = document.getElementById(value + "_" + i)
+                                element.style.color = "#EB098E"
+                                element.style.textShadow = "2px 2px 2px #FDB0DA"
+                            }
+                        }
+                        setTimeout(function () {
+                            document.getElementById("temp_me").remove()
+                        }, 6000)
+                    }, 4000)
+                    resolve("change_me_color")
+                }, 500)
+            })
+        }
+        heart() {
+            return new Promise(function (resolve) {
+                document.getElementById('me').innerHTML += '<p data-text="❤" id="heart" class="heart">❤</p>'
+                let heart = document.getElementById("heart")
+                setTimeout(function () {
+                    heart.style.opacity = "1"
+                    heart.style.zIndex = "3"
+                }, 20)
+                setTimeout(function () {
+                    heart.style.animation = "beat 1s linear infinite"
+                    setTimeout(function () {
+                        resolve("heart")
+                    }, 500)
+                }, 4500)
+            })
+        }
+        show_ta_all() {
+            return new Promise(function (resolve) {
+                let element = document.getElementById("ta")
+                for (const value of arr) {
+                    for (let i = 0; i < love_2[value][0].length; i++) {
+                        element.innerHTML += "<span id=" + value + "_" + i + " style='color:#FDB0DA;top:" + love_2[value][0][i] + "px;left:" + love_2[value][1][i] + "px;text-shadow:2px 2px 2px #EB098E;'>❤</span>"
+                    }
+                }
+                setTimeout(function () {
+                    element.style.opacity = "1"
+                    setTimeout(function () {
+                        document.getElementById("temp_ta").remove()
+                        resolve("show_ta_all")
+                    }, 3500)
+                }, 500)
+            })
+        }
+        near() {
+            return new Promise(function (resolve) {
+                let me = document.getElementById("me");
+                let ta = document.getElementById("ta");
+                me.style.top = "0";
+                me.style.left = "0";
+                ta.style.top = "0";
+                ta.style.left = "0";
+                setTimeout(function () {
+                    me.style.top = "-132px";
+                    me.style.left = "-364px";
+                    ta.style.top = "230px";
+                    ta.style.left = "600px";
+                    setTimeout(function () {
+                        resolve("near");
+                    }, 4000)
+                }, 100)
+            })
+        }
+        rotate() {
+            return new Promise(function (resolve) {
+                document.getElementById("box").style.transform = "rotate3d(1,1,1,360deg)";
+                setTimeout(function () {
+                    resolve("rotate")
+                }, 6500)
+            })
+        }
+        separate() {
+            return new Promise(function (resolve) {
+                let ta = document.getElementById("ta")
+                ta.style.top = "0"
+                ta.style.left = "0"
+                setTimeout(function () {
+                    resolve()
+                }, 3500)
+            })
+        }
+        arrow() {
+            return new Promise(function (resolve) {
+                let me = document.getElementById("me")
+                me.innerHTML += '<div class="arrow" id="arrow"></div>'
+                let element = document.getElementById("arrow");
+                for (let i = 0; i < 18; i++) {
+                    let style = "'z-index:2;color:#fe0;top:" + arrow.top[i] + "px;left:" + arrow.left[i] + "px;transform: rotate(" + arrow.rotate[i] + "deg)'"
+                    element.innerHTML += '<span id="arrow_' + i + '" style=' + style + '>❤</span>'
+                }
+                setTimeout(function () {
+                    element.style.top = parseInt(Math.random() * (400 - 100) + 100) + "px";
+                }, 1000)
+                setTimeout(function () {
+                    let heart = document.getElementById("heart")
+                    let heart_center_x = Math.floor(heart.getBoundingClientRect().left) + Math.floor(heart.getBoundingClientRect().width / 2)
+                    let heart_center_y = Math.floor(heart.getBoundingClientRect().top) + Math.floor(heart.getBoundingClientRect().height / 2)
+                    let arrow = document.getElementById("arrow")
+                    let rotate = 360 * Math.atan((arrow.getBoundingClientRect().y - heart.getBoundingClientRect().y) / (arrow.getBoundingClientRect().x - heart.getBoundingClientRect().x)) / (2 * Math.PI);
+                    element.style.transform = "rotate(" + rotate + "deg)"
+                    let x = heart_center_x + Math.abs(me.getBoundingClientRect().left) - (arrow.getBoundingClientRect().width / 2)
+                    let y = heart_center_y + Math.abs(me.getBoundingClientRect().top) - (arrow.getBoundingClientRect().height / 2)
+                    setTimeout(function () {
+                        element.style.top = y + 'px'
+                        element.style.left = x + 'px'
+                        setTimeout(function () {
+                            heart.style.animation = ""
+                            resolve()
+                        }, 2000)
+                    }, 2000)
+                }, 3000)
+            })
+        }
+        heartBroken_() {
+            return new Promise(function (resolve) {
+                let element = document.getElementById('heart')
+                element.classList.add("heartBroken")
+                setTimeout(function () {
+                    element.innerHTML = ''
+                    element.innerText = ''
+                    setTimeout(function () {
+                        document.getElementById('arrow').style.top = window.screen.height + 200 + "px"
+                        setTimeout(function () {
+                            resolve()
+                        }, 2000)
+                    }, 2000)
+                }, 800)
+            })
+        }
+        drippingBlood() {
+            return new Promise(function (resolve) {
+                let height = document.documentElement.clientHeight + 50
+                let heart = document.getElementById("heart")
+                heart.innerHTML += '<div id="blood"></div>'
+                let blood = document.getElementById('blood')
+                let i = 1;
+                let stop = 10;
+                let intervalID = setInterval(function () {
+                    if (i === 6){
+                        resolve()
+                    }
+                    if (i > stop) {
+                        clearInterval(intervalID)
+                        return
+                    }
+                    blood.innerHTML += "<p id='blood_" + i + "'class='bloods'></p>"
+                    start(i)
+                    i++
+                }, 1000)
+                function start(i){
+                    if(i === stop){
+                        setTimeout(function () {
+                            blood.innerHTML = ''
+                        },2100)
+                    }
+                    setTimeout(function () {
+                        document.getElementById("blood_" + i).style.top = height+"px"
+                    }, 50)
+                }
+            })
+        }
+        ta_disappear(){
+            return new Promise(function (resolve){
+                let ta = document.getElementById('ta');
+                ta.style.top = "-300px"
+                ta.style.left = "-200px"
+                ta.style.opacity = '0'
+                setTimeout(function () {
+                    document.getElementById("heart").style.opacity = '0'
+                    setTimeout(function () {
+                        resolve()
+                    },3500)
+                },3000)
+            })
+        }
+        broken(){
+            return new Promise(function (resolve){
+                let height = window.screen.height * 1.2
+                let width = window.screen.width * 1.2
+                let top = "";
+                let left = "";
+                let love_left = document.getElementById('love_left').childNodes;
+                let love_right = document.getElementById('love_right').childNodes
+                for (let i = 0; i < love_left.length; i++) {
+                    top = parseInt(Math.random() * (height - 1) + 1)
+                    left = parseInt(Math.random() * (width - 1) + 1)
+                    love_left[i].style.transitionDuration = '3s';
+                    love_left[i].style.top = top + "px";
+                    love_left[i].style.left = left + "px";
+                    love_left[i].style.transform = "rotate("+(Math.random() * (360 - 1) + 1)+"deg)"
+                }
+                for (let i = 0; i < love_right.length; i++) {
+                    top = parseInt(Math.random() * (height - 1) + 1)
+                    left = parseInt(Math.random() * (width - 1) + 1)
+                    love_right[i].style.transitionDuration = '3s';
+                    love_right[i].style.top = top + "px";
+                    love_right[i].style.left = left + "px";
+                    love_right[i].style.transform = "rotate("+(Math.random() * (360 - 1) + 1)+"deg)"
+                }
+                setTimeout(function () {
+                    resolve()
+                },3500)
+            })
+        }
+        end(){
+            document.getElementById('me').style.opacity = '0'
+            setTimeout(function () {
+                let body = document.getElementsByTagName('body');
+                body.removeChild(document.getElementById('box'));
+            },5000)
+        }
+    }
+</script>
 </body>
 </html>
+————————————————
+
+                            版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+                        
+原文链接：https://blog.csdn.net/chenzhi0122/article/details/131245552
