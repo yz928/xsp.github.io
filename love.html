@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>连续表白</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffebcd;
+            margin: 0;
+            text-align: center;
+        }
+        .message {
+            font-size: 2em;
+            color: #ff69b4;
+            padding: 20px;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            background-color: rgba(255, 105, 180, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="message" id="message"></div>
+
+<script>
+    const messages = [
+        "我喜欢你！",
+        "你是我心里的阳光！",
+        "每天都想告诉你，我爱你！",
+        "遇见你是我此生最美好的事！",
+        "你是我心中永远的宝贝！",
+        "我对你的爱永远不会改变！",
+        "每时每刻都在想着你！"
+    ];
+
+    let index = 0;
+
+    function showMessage() {
+        document.getElementById("message").innerText = messages[index];
+        index = (index + 1) % messages.length; // 循环显示
+    }
+
+    setInterval(showMessage, 2000); // 每2秒显示一条表白
+
+    showMessage(); // 页面加载时先显示第一条
+</script>
+
+</body>
+</html>
