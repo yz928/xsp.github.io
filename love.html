@@ -1,59 +1,295 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>浪漫表白</title>
-<style>
-body {
-margin: 0;
-overflow: hidden;
-background: #000;
-}
-canvas {
-position: absolute;
-width: 100%;
-height: 100%;
-}
-#message {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-font-size: 40px;
-color: #f584b7;
-}
-</style>
-</head>
-<body>
-<div id="message">💗我爱你许淑萍💗</div>
-<canvas id="heartCanvas"></canvas>
-<script>
-const canvas = document.getElementById('heartCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+    <title>执子之手，与子偕老</title>
+    <meta name="language" content="zh-CN">
+    <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/jquery.fancybox-1.3.4.css" type="text/css" media="screen">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <link href="css/prettyPhoto.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/content_switch.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/cScroll.js"></script>
+    <script src="js/jquery.cycle.all.latest.js" type="text/javascript"></script>
+    <script src="js/jquery.color.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script src="js/prettyPhoto.js"></script>
+<body onpaste="return false" ondragstart="return false" onmouseover="window.status='';return true"
+    oncopy="return false;">
+    <frameset>
+        <frame src="index.html">
+    </frameset>
+    <script>
+        function stop() {
+            alert('白风夕，愿得一人心，白首不分离！');
+            return false;
+        }
+        document.oncontextmenu = stop; 
+    </script>
 
-function drawHeart(x, y, size) {
-ctx.beginPath();
-ctx.moveTo(x, y);
-ctx.bezierCurveTo(x + size / 2, y - size / 2, x + size * 1.5, y + size / 3, x, y + size);
-ctx.bezierCurveTo(x - size * 1.5, y + size / 3, x - size / 2, y - size / 2, x, y);
-ctx.fillStyle = 'rgba(255,105,180,0.8)';
-ctx.fill();
-}
+    <body onselectstart="return false" onpaste="return false" oncopy="return false;" oncut="return false;">
+        </a>
+        <script>
 
-function animate() {
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-for (let i = 0; i < 50; i++) {
-const x = Math.random() * canvas.width;
-const y = Math.random() * canvas.height;
-const size = Math.random() * 20 + 10;
-drawHeart(x, y, size);
-}
-requestAnimationFrame(animate);
-}
+            function checkhtml5() {
+                if ($.browser.msie && parseInt($.browser.version, 10) < 9) {
+                    document.body.innerHTML = "<div style=' clear: both; text-align:center; position: relative; height: 50px; margin-top: 30px; padding: 20px; background-color: red; color: white; font-size:20px;'>你的浏览器非常落后，不支持 HTML5!<br/>请使用 Chrome 14+/IE 9+/Firefox 7+/Safari 4+ 其中任意一款浏览器访问此页面。</a></div>";
 
-animate();
-</script>
-</body>
+                }
+            }
+        </script>
+        <style>
+		body {
+            font-family:STSong,华文宋体;
+        }
+            a.wb_sina {
+                float: left;
+                margin-top: 20px;
+                margin-left: 15px;
+                display: inline-block;
+                padding: 4px 10px;
+                border-radius: 3px;
+                background-color: #e55345;
+                background-image: -moz-linear-gradient(top, #e96249, #e03c40);
+                background-image: -ms-linear-gradient(top, #e96249, #e03c40);
+                background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#e96249), to(#e03c40));
+                background-image: -webkit-linear-gradient(top, #e96249, #e03c40);
+                background-image: -o-linear-gradient(top, #e96249, #e03c40);
+                background-image: linear-gradient(top, #e96249, #e03c40);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e96249', endColorstr='#e03c40', GradientType=0);
+                background-repeat: repeat-x;
+                text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+                border: 1px solid #cf2b28;
+                color: #fff !important;
+                box-shadow: 0 1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 rgba(0, 0, 0, .2);
+            }
+            a.wb_sina:hover {
+                background-image: -moz-linear-gradient(top, #e03c40, #e96249);
+                background-image: -ms-linear-gradient(top, #e03c40, #e96249);
+                background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#e03c40), to(#e96249));
+                background-image: -webkit-linear-gradient(top, #e03c40, #e96249);
+                background-image: -o-linear-gradient(top, #e03c40, #e96249);
+                background-image: linear-gradient(top, #e03c40, #e96249);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e03c40', endColorstr='#e96249', GradientType=0);
+            }
+
+            a.wb_sina span {
+                display: inline-block;
+                vertical-align: -5px;
+                margin-right: 7px;
+                height: 20px;
+                width: 24px;
+                background: url(./images/weibo.png) no-repeat;
+            }
+
+            a.wb_tencent {
+                float: left;
+                margin-top: 20px;
+                margin-left: 15px;
+                display: inline-block;
+                padding: 4px 10px;
+                border-radius: 3px;
+                background-color: #0e7fcc;
+                background-image: -moz-linear-gradient(top, #1288d4, #0771c1);
+                background-image: -ms-linear-gradient(top, #1288d4, #0771c1);
+                background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1288d4), to(#0771c1));
+                background-image: -webkit-linear-gradient(top, #1288d4, #0771c1);
+                background-image: -o-linear-gradient(top, #1288d4, #0771c1);
+                background-image: linear-gradient(top, #1288d4, #0771c1);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1288d4', endColorstr='#0771c1', GradientType=0);
+                background-repeat: repeat-x;
+                text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+                border: 1px solid #0D6EB8;
+                color: #fff !important;
+                box-shadow: 0 1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 rgba(0, 0, 0, .2);
+            }
+
+            a.wb_tencent:hover {
+                background-color: #0e7fcc;
+                background-image: -moz-linear-gradient(top, #0771c1, #1288d4);
+                background-image: -ms-linear-gradient(top, #0771c1, #1288d4);
+                background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0771c1), to(#1288d4));
+                background-image: -webkit-linear-gradient(top, #0771c1, #1288d4);
+                background-image: -o-linear-gradient(top, #0771c1, #1288d4);
+                background-image: linear-gradient(top, #0771c1, #1288d4);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0771c1', endColorstr='#1288d4', GradientType=0);
+            }
+
+            a.wb_tencent span {
+                display: inline-block;
+                vertical-align: -5px;
+                margin-right: 7px;
+                height: 20px;
+                width: 24px;
+                background: url(./images/weibo.png) no-repeat 0 -20px;
+            }
+            #abox {
+                position: fixed;
+                _position: absolute;
+                right: 15px;
+                z-index: 99999999;
+            }
+        </style>
+        </head>
+
+        <body onLoad="checkhtml5()">
+            <div id="abox">
+            </div>
+            <div class="page_spinner">
+                <div></div>
+            </div>
+            <div class="over">
+                <div class="centre">
+                    <div class="main">
+                        <!--header -->
+                        <header>
+                            <h1><span id="logo"><img src="images/logo1.png" alt="" usemap="#logo"></span></h1>
+                            <nav class="menu">
+                                <ul id="menu">
+                                    <li id="nav1"><img src="images/nav1.png" alt=""><span>爱的宣誓</span></li>
+                                    <li id="nav2"><img src="images/nav2.png" alt=""><span>恋爱历程</span> </li>
+                                    <li id="nav3"><img src="images/nav3.png" alt=""><span>絮叨絮叨</span></li>
+                                    <li id="nav4"><img src="images/nav4.png" alt=""><span>且试天下</span></li>
+                                    <li id="nav5"><img src="images/nav5.png" alt=""><span>爱的感受</span></li>
+                                    <li id="nav6"><img src="images/nav6.png" alt=""><span>执子之手</span></li>
+                                </ul>
+                            </nav>
+                            <img src="images/spacer.gif" alt="" id="navigation" usemap="#navigation">
+                            <map name="navigation" class="navigation">
+                            </map>
+                            <map name="logo" class="map_logo"></map>
+                        </header>
+                        <!--header end-->
+                        <!--content -->
+                        <map name="back" class="map_back"></map>
+                        <article id="content">
+                            <ul>
+                                <li id="page_Home">
+                                    <img src="images/bg_content.png" alt="" class="bg_cont">
+                                    <span class="back"><img src="images/nav1.png" alt="" usemap="#back"><a
+                                            href="index.html#close">返回</a></span>
+                                    <div class="pad">
+                                        <h2>爱的宣誓</h2>
+                                        黑丰息 &amp; 白风夕<br />
+                                        愿得一人心，白首不分离。<br />
+                                        愉悦其实真的狠简单,有你有事做,有所期盼！<br />
+                                        初恋像柠檬,虽酸却耐人寻味；<br />
+                                        热恋像火焰,虽热却不能自拔。<br />
+                                        --
+                                    </div>
+                                </li>
+                                <li id="page_About">
+                                    <img src="images/bg_content.png" alt="" class="bg_cont">
+                                    <span class="back"><img src="images/nav2.png" alt="" usemap="#back"><a
+                                            href="index.html#close">返回</a></span>
+                                    <div class="pad">
+                                        <h2>恋爱历程</h2>
+                                        <div class="relative">
+                                            <div class="scroll">
+                                                <span>黑丰息 &amp; 白风夕</span>
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp;你还记得么？</p>
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp;2022年05月20日。</p>
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp;我们在且试天下相遇。</p>
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp;然后.........</p>
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp;过程.........</p>
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp;愿得一人心，白首不分离</p>
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp;执子之手，与子偕老</p>
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp; - </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li id="page_Talk">
+                                    <img src="images/bg_content.png" alt="" class="bg_cont">
+                                    <span class="back"><img src="images/nav3.png" alt="" usemap="#back"><a
+                                            href="index.html#close">返回</a></span>
+                                    <div class="pad">
+                                        <h2>絮叨絮叨</h2>
+                                        <div class="relative">
+                                            <div class="scroll">
+                                                <div style="width:100%;float: left; border-bottom: 1px solid #CCCCCC;">
+                                                    黑丰息<br /><span style="float: right"> --白风夕 </span></div>
+
+
+
+                                                <div style="width:100%;float: left">初恋像柠檬,虽酸却耐人寻味;热恋像火焰,虽热却不能自拔;失恋像伤疤,虽痛却无法释怀。因此咱们要懂得呵护感情!<br /><span
+                                                        style="float: right"> --白风夕 </span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li id="page_Message">
+                                    <img src="images/bg_content.png" alt="" class="bg_cont">
+                                    <span class="back"><img src="images/nav4.png" alt="" usemap="#back"><a
+                                            href="index.html#close">返回</a></span>
+                                    <div class="pad">
+                                        <h2>且试天下</h2>
+                                        <div class="relative">
+                                            <div align="center" class="scroll">
+                                                如果你冷,我将你拥入怀中;如果你忧,我替你擦去泪痕;如果你爱我,我要向全世界广播…我只想给你我真实的爱。
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li id="page_Blog">
+                                    <img src="images/bg_content.png" alt="" class="bg_cont">
+                                    <span class="back"><img src="images/nav5.png" alt="" usemap="#back"><a
+                                            href="index.html#close">返回</a></span>
+                                    <div class="pad">
+                                        <h2>爱的感受</h2>
+                                        <div class="relative">
+                                            <div class="scroll">
+                                                <ul class="gallery fancybox">
+                                                    <li style="line-height:20px">初恋像柠檬,虽酸却耐人寻味;热恋像火焰,虽热却不能自拔;失恋像伤疤,虽痛却无法释怀。因此咱们要懂得呵护感情!</li>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li id="page_Time">
+                                    <img src="images/bg_content.png" alt="" class="bg_cont">
+                                    <span class="back"><img src="images/nav6.png" alt="" usemap="#back"><a
+                                            href="index.html#close">返回</a></span>
+                                    <div class="pad">
+                                        <h2>执子之手</h2>
+                                        <div id="loveHeart" style="margin-top: 30px;font-size: 25px;">
+                                            <span style="">愿得一人心，白首不分离？</span>
+                                            <div id="elapseClock" style="margin: 10px 0px 10px 0px;"></div>
+                                            <img src="images/1.gif" />　　　　<img src="images/2.gif" /><br /><br />
+                                            <div id="loveu">
+                                                愉悦其实真的狠简单,有你有事做,有所期盼！<br />
+                                                <div class="signature" style="float: right; margin-right: 50px;">白风夕
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                    </div>
+                    </li>
+                    </ul>
+                    </article>
+                    <!--content end-->
+                </div>
+            </div>
+            <div class="bg1">
+                <div class="main">
+                    <!--footer -->
+                    <footer style="line-height:20px">
+                        <div id="copyright">
+                            <a href="" target=_blank></a> <a href="" target=_blank></a>
+                            </object>
+                        </div>
+                    </footer>
+                    <!--footer end-->
+                </div>
+            </div>
+            </div>
+            </div>
+        </body>
 </html>
